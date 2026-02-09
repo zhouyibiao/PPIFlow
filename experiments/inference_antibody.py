@@ -28,8 +28,8 @@ class Experiment:
         self.batch_size = self.dataset_cfg.samples_batch_size if self.dataset_cfg.sample_original_binder_len else 1
         self._task = self._data_cfg.task
         self._test_dataset = AntibodyTestDataset(dataset_cfg=self.dataset_cfg, task=self._task)
-        if torch.cuda.is_available():
-            if torch.cuda.device_count() > 1:
+        if torch.musa.is_available():
+            if torch.musa.device_count() > 1:
                 self._train_device_ids = [0]
             else:
                 self._train_device_ids = [0]
@@ -56,7 +56,7 @@ class Experiment:
             batch_size=self.batch_size
         )
 
-        if torch.cuda.is_available():
+        if torch.musa.is_available():
             trainer = Trainer(
                 logger=False,
                 use_distributed_sampler=False,

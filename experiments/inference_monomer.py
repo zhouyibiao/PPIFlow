@@ -47,7 +47,7 @@ class EvalRunner:
             log.info(f'Saving inference config to {config_path}')
 
         # Read checkpoint and initialize module.
-        if torch.cuda.is_available():
+        if torch.musa.is_available():
             map_location = None
         else:
             map_location = "cpu"
@@ -74,7 +74,7 @@ class EvalRunner:
         return output_dir
 
     def run_sampling(self):
-        if torch.cuda.is_available():
+        if torch.musa.is_available():
             devices = GPUtil.getAvailable(
                 order='memory', limit = 8)[:self._infer_cfg.num_gpus]
         else:
@@ -89,7 +89,7 @@ class EvalRunner:
             raise ValueError(f'Unknown task {self._infer_cfg.task}')
         dataloader = torch.utils.data.DataLoader(
             eval_dataset, batch_size=1, shuffle=False, drop_last=False)
-        if torch.cuda.is_available():
+        if torch.musa.is_available():
             trainer = Trainer(
                 accelerator="gpu",
                 strategy="ddp",

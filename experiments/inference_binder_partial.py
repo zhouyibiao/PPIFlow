@@ -35,8 +35,8 @@ class Experiment:
             self._test_dataset = PpiTestPartialDataset(dataset_cfg=self.dataset_cfg, task=self._task)
         else:
             self._test_dataset = PpiTestDataset(dataset_cfg=self.dataset_cfg, task=self._task)
-        if torch.cuda.is_available():
-            if torch.cuda.device_count() > 1:
+        if torch.musa.is_available():
+            if torch.musa.device_count() > 1:
                 # self._train_device_ids = eu.get_available_device(self._exp_cfg.num_devices)
                 self._train_device_ids = [0]
             else:
@@ -79,7 +79,7 @@ class Experiment:
             batch_size=self.batch_size
         )
 
-        if torch.cuda.is_available():
+        if torch.musa.is_available():
             trainer = Trainer(
                 **self._exp_cfg.trainer,
                 logger=logger,

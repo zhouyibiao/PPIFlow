@@ -73,7 +73,7 @@ def main(args):
     alphabet_dict = dict(zip(alphabet, range(21)))    
     print_all = args.suppress_print == 0 
     omit_AAs_np = np.array([AA in omit_AAs_list for AA in alphabet]).astype(np.float32)
-    device = torch.device("cuda:0" if (torch.cuda.is_available()) else "cpu")
+    device = torch.device("musa:0" if (torch.musa.is_available()) else "cpu")
     
     if chain_id_dict:
         pass

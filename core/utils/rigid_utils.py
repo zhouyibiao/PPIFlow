@@ -767,18 +767,18 @@ class Rotation:
         else:
             raise ValueError("Both rotations are None")
 
-    def cuda(self) -> Rotation:
+    def musa(self) -> Rotation:
         """
-        Analogous to the cuda() method of torch Tensors
+        Analogous to the musa() method of torch Tensors
 
         Returns:
-            A copy of the Rotation in CUDA memory
+            A copy of the Rotation in MUSA memory
         """
         if self._rot_mats is not None:
-            return Rotation(rot_mats=self._rot_mats.cuda(), quats=None)
+            return Rotation(rot_mats=self._rot_mats.musa(), quats=None)
         elif self._quats is not None:
             return Rotation(
-                rot_mats=None, quats=self._quats.cuda(), normalize_quats=False
+                rot_mats=None, quats=self._quats.musa(), normalize_quats=False
             )
         else:
             raise ValueError("Both rotations are None")
@@ -1430,11 +1430,11 @@ class Rigid:
 
         return Rigid(rot_obj, translation)
 
-    def cuda(self) -> Rigid:
+    def musa(self) -> Rigid:
         """
         Moves the transformation object to GPU memory
 
         Returns:
             A version of the transformation on GPU
         """
-        return Rigid(self._rots.cuda(), self._trans.cuda())
+        return Rigid(self._rots.musa(), self._trans.musa())

@@ -102,7 +102,7 @@ class IPAStack(nn.Module):
         ]
 
         def clear_cache(b, *args, **kwargs):
-            torch.cuda.empty_cache()
+            torch.musa.empty_cache()
             return b(*args, **kwargs)
 
         if clear_cache_between_blocks:

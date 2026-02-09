@@ -123,7 +123,7 @@ class Sampler(object):
         train_cfg = ckpt_dict['config']
         self.log_folder_name, self.log_dir, self.ckpt_dir = set_log(train_cfg)
         self.model = CNF(EquiformerV2(**train_cfg.model), train_cfg, coeff=self.config.sample.coeff,
-                         stepsize=self.config.sample.num_steps, mode=self.config.mode).cuda()
+                         stepsize=self.config.sample.num_steps, mode=self.config.mode).musa()
         # self.model = torch.compile(self.model)
         print(f'Number of parameters: {count_parameters(self.model)}')
         self.ema = load_ema(self.model, decay=train_cfg.train.ema)
@@ -133,7 +133,7 @@ class Sampler(object):
 
         if self.config.conf_ckpt is not None:
             conf_ckpt = torch.load(self.config.conf_ckpt)
-            self.conf_model = Confidence(EquiformerV2(**conf_ckpt['config'].model), conf_ckpt['config']).cuda()
+            self.conf_model = Confidence(EquiformerV2(**conf_ckpt['config'].model), conf_ckpt['config']).musa()
             if 'module.' in list(conf_ckpt["state_dict"].keys())[0]:
                 state_dict = {k[7:]: v for k, v in conf_ckpt["state_dict"].items()}
             self.conf_model.load_state_dict(state_dict)
@@ -152,7 +152,7 @@ class Sampler(object):
         with torch.no_grad():
             for batch in tqdm(self.test_loader):
 
-                batch = batch.to(f'cuda:{self.device[0]}')
+                batch = batch.to(f'musa:{self.device[0]}')
                 aa_str, aa_onehot, aa_num, coords, mask, atom_mask, batch_id, pdb_codes = batch.aa_str, batch.aa_onehot, batch.aa_num, \
                                                                                           batch.pos, batch.aa_mask, batch.atom_mask, batch.batch, batch.id
                 chi, chi_alt, chi_mask = batch.chi, batch.chi_alt, batch.chi_mask

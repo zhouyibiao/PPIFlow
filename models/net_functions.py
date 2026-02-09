@@ -21,7 +21,7 @@ def create_local_attn_bias(
         n_queries (int): window size of quiries
         n_keys (int): window size of keys/values
         inf (float, optional): the inf to mask attention. Defaults to 1e10.
-        device (torch.device, optional): cuda|cpu|None. Defaults to None.
+        device (torch.device, optional): musa|cpu|None. Defaults to None.
 
     Returns:
         torch.Tensor: the diagonal-like global attention bias

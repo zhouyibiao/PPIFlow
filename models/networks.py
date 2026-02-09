@@ -196,7 +196,7 @@ class AttentionX(nn.Module):
 
                 3. A PyTorch implementation defined in C++ matching the above formulation
 
-            The function may call optimized kernels for improved performance when using the CUDA backend.
+            The function may call optimized kernels for improved performance when using the MUSA backend.
             For all other backends, the PyTorch implementation will be used.All implementations are enabled by default.
             Scaled dot product attention attempts to automatically select the most optimal implementation based on the inputs.
         """

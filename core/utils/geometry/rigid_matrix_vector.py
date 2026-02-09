@@ -181,5 +181,5 @@ class Rigid3Array:
         )
         return cls(rotation, translation)
 
-    def cuda(self) -> Rigid3Array:
-        return Rigid3Array.from_tensor_4x4(self.to_tensor_4x4().cuda())
+    def musa(self) -> Rigid3Array:
+        return Rigid3Array.from_tensor_4x4(self.to_tensor_4x4().musa())

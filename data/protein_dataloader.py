@@ -36,7 +36,7 @@ class ProteinData(LightningDataModule):
         self._valid_dataset1 = valid_dataset1
         self._predict_dataset = predict_dataset
 
-    if torch.cuda.is_available():
+    if torch.musa.is_available():
         def train_dataloader(self, rank=None, num_replicas=None):
             num_workers = self.loader_cfg.num_workers
             return DataLoader(

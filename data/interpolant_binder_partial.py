@@ -291,7 +291,7 @@ class Interpolant:
         for i, t_2 in enumerate(ts[1:]):
             if verbose: # and i % 1 == 0:
                 print(f'{i=}, t={t_1.item():.2f}')
-                print(torch.cuda.mem_get_info(trans_0.device), torch.cuda.memory_allocated(trans_0.device))
+                print(torch.musa.mem_get_info(trans_0.device), torch.musa.memory_allocated(trans_0.device))
             # Run model.
             trans_t_1, rotmats_t_1 = prot_traj[-1]
             if self._trans_cfg.corrupt:

@@ -133,8 +133,8 @@ class FlowModule(LightningModule):
 
     def predict_step(self, batch, batch_idx):
         del batch_idx # Unused
-        if torch.cuda.is_available():
-            device = f'cuda:{torch.cuda.current_device()}'
+        if torch.musa.is_available():
+            device = f'musa:{torch.musa.current_device()}'
         else:
             device = 'cpu'#debug mode
         interpolant = Interpolant(self._infer_cfg.interpolant)
