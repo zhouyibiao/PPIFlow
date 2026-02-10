@@ -1,5 +1,5 @@
 # requirements.txt - 从ppiflow的environment.yml提取的pip依赖
---find-links https://data.pyg.org/whl/torch-2.3.0+cu121.html
+--find-links https://data.pyg.org/whl/torch-2.3.1+cu121.html
 --extra-index-url https://download.pytorch.org/whl/cu121
 absl-py==2.1.0
 aiohappyeyeballs==2.5.0
@@ -139,13 +139,13 @@ tensorboard-data-server==0.7.2
 threadpoolctl==3.5.0
 tmtools==0.2.0
 tomli==2.2.1
-torch==2.3.0+cu121
+torch==2.3.1+cu121
 torch-cluster==1.6.3+pt23cu121
 torch-geometric==2.6.1
 torch-scatter==2.1.2+pt23cu121
 torch-sparse==0.6.18+pt23cu121
 torch-spline-conv==1.2.2+pt23cu121
-torchaudio==2.3.0+cu121
+torchaudio==2.3.1+cu121
 torchmetrics==1.6.2
 torchtyping==0.1.5
 torchvision==0.18.1+cu121
