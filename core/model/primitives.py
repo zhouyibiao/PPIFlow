@@ -38,8 +38,7 @@ if fa_is_installed:
     from flash_attn.bert_padding import unpad_input
     from flash_attn.flash_attn_interface import flash_attn_unpadded_kvpacked_func
 
-# fastln_is_installed = os.getenv("LAYERNORM_TYPE", None) == "fast_layernorm"
-fastln_is_installed = True
+fastln_is_installed = os.getenv("LAYERNORM_TYPE", None) == "fast_layernorm"
 if fastln_is_installed:
     # LayerNorm is a time bottomneck, so we use a custom implementation.
     from models.layer_norm.layer_norm import FusedLayerNorm

@@ -213,8 +213,13 @@ def rot_to_quat(
     ]
 
     k = (1.0 / 3.0) * torch.stack([torch.stack(t, dim=-1) for t in k], dim=-2)
+    original_device = k.device
+    # yibiao.zhou： torch.linalg.eigh 在 MUSA暂时不支持，移到cpu进行规避
+    if hasattr(torch, "musa") and torch.musa.is_available():
+        k = k.to('cpu')
 
     _, vectors = torch.linalg.eigh(k)
+    vectors = vectors.to(original_device)
     return vectors[..., -1]
 
 

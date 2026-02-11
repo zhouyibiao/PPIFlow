@@ -75,6 +75,7 @@ class Experiment:
         if torch.musa.is_available():
             trainer = Trainer(
                 logger=False,
+                accelerator="musa",
                 use_distributed_sampler=False,
                 enable_model_summary=True,
                 devices=self._train_device_ids,
