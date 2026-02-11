@@ -1,0 +1,4 @@
+*.pyc
+ckpts
+output/
+output_logs/
